@@ -1,0 +1,7 @@
+{
+  "version": "0.4.0",
+  "notes": "首次加入自动更新：启动自动检查，也可手动检查；确认后自动下载并校验安装程序。",
+  "sha256": "5f910e380b8c4a6c4472f83b0d06971cd9514f24641a59e4aadcd48d0107f1c3",
+  "size": 16163211,
+  "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.0/ViralStockPoster-Setup-V0.4.0.exe"
+}
