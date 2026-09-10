@@ -1,0 +1,52 @@
+name: Publish V0.4.0 update package
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v040.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      ARTIFACT_URL: 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-96ac-81fd-894d-5aa37b945dda/raw?se=2026-09-10T22%3A43%3A59Z&sp=r&sv=2026-02-06&sr=b&scid=eee61d81-a9c5-5c58-a3e4-6fd85d2858d2&skoid=4b04981f-b1dc-41e0-a770-8ce0d5c8f411&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-10T07%3A43%3A41Z&ske=2026-09-11T07%3A43%3A41Z&sks=b&skv=2026-02-06&sig=j%2BIQtDxzbCijpAqt4HMOUSe//wBkJVhM49rdzJHS/WY%3D'
+      EXPECTED_SHA256: '5f910e380b8c4a6c4472f83b0d06971cd9514f24641a59e4aadcd48d0107f1c3'
+      EXPECTED_SIZE: '16163211'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download private build artifact through temporary handoff URL
+        run: |
+          curl -L --fail --retry 3 "$ARTIFACT_URL" -o artifact.zip
+          unzip -j artifact.zip 'ViralStockPoster-Setup-V0.4.0.exe' -d extracted
+
+      - name: Verify and publish installer
+        run: |
+          FILE='extracted/ViralStockPoster-Setup-V0.4.0.exe'
+          ACTUAL_SHA256="$(sha256sum "$FILE" | awk '{print $1}')"
+          ACTUAL_SIZE="$(stat -c%s "$FILE")"
+          test "$ACTUAL_SHA256" = "$EXPECTED_SHA256"
+          test "$ACTUAL_SIZE" = "$EXPECTED_SIZE"
+          mkdir -p releases/v0.4.0
+          mv "$FILE" releases/v0.4.0/ViralStockPoster-Setup-V0.4.0.exe
+          cat > latest.json <<'JSON'
+          {
+            "version": "0.4.0",
+            "notes": "首次加入自动更新：启动自动检查，也可手动检查；确认后自动下载并校验安装程序。",
+            "sha256": "5f910e380b8c4a6c4472f83b0d06971cd9514f24641a59e4aadcd48d0107f1c3",
+            "size": 16163211,
+            "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.0/ViralStockPoster-Setup-V0.4.0.exe"
+          }
+          JSON
+
+      - name: Commit public update feed
+        run: |
+          rm -f .github/workflows/publish-v040.yml
+          git config user.name 'ViralStockPoster Update Bot'
+          git config user.email 'actions@github.com'
+          git add -A
+          git commit -m 'Publish Viral Stock Poster V0.4.0'
+          git push
