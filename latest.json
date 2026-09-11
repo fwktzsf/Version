@@ -1,7 +1,7 @@
 {
-  "version": "0.4.4",
-  "notes": "升级为万象 AI：全新 Windows 桌面品牌与高端创作界面，新增云境/玄夜双主题、首页/创作/模板/历史/素材/设置导航及重置功能；保留原有生成流程、业务逻辑和 8 个高清模板预览。",
-  "sha256": "0bbb796a8d4da96400f1e584619772860f12a53846946b01ee4a05f63ac55752",
-  "size": 32642044,
-  "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.4/ViralStockPoster-Setup-V0.4.4.exe"
+  "version": "0.4.5",
+  "notes": "修复自动更新安装后仍显示旧版本的问题：更新后会校验实际安装版本并可靠重启，安装异常可自动重试并记录状态；同时清理旧名称快捷方式，为安装器、桌面和开始菜单统一使用万象 AI 新图标。",
+  "sha256": "215634ef3aebb1aa9338f3516581390f378bd99978838ac2b8f506a2a266b8da",
+  "size": 32716129,
+  "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.5/ViralStockPoster-Setup-V0.4.5.exe"
 }
