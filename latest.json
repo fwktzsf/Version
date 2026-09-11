@@ -1,7 +1,8 @@
 {
-  "version": "0.4.5",
-  "notes": "修复自动更新安装后仍显示旧版本的问题：更新后会校验实际安装版本并可靠重启，安装异常可自动重试并记录状态；同时清理旧名称快捷方式，为安装器、桌面和开始菜单统一使用万象 AI 新图标。",
-  "sha256": "215634ef3aebb1aa9338f3516581390f378bd99978838ac2b8f506a2a266b8da",
-  "size": 32716129,
-  "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.5/ViralStockPoster-Setup-V0.4.5.exe"
+  "version": "0.4.6",
+  "minimum_supported_version": "0.4.6",
+  "notes": "生成设置区域缩窄并取消内部滚动条，8 个模板在最小窗口完整显示；生成数量支持下拉选择及手动输入 1–100；加入最低支持版本强制更新策略；每次安装首次启动自动绑定本机机器码，覆盖升级保持绑定，并可在设置中查看和复制机器码。",
+  "sha256": "f2a75f6b2f1d8cc45096972b6a44186d960382a5245732bfc024d597eff73ecc",
+  "size": 32772606,
+  "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.6/ViralStockPoster-Setup-V0.4.6.exe"
 }
