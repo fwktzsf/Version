@@ -1,8 +1,15 @@
 {
-  "version": "0.4.6",
-  "minimum_supported_version": "0.4.6",
-  "notes": "生成设置区域缩窄并取消内部滚动条，8 个模板在最小窗口完整显示；生成数量支持下拉选择及手动输入 1–100；加入最低支持版本强制更新策略；每次安装首次启动自动绑定本机机器码，覆盖升级保持绑定，并可在设置中查看和复制机器码。",
-  "sha256": "f2a75f6b2f1d8cc45096972b6a44186d960382a5245732bfc024d597eff73ecc",
-  "size": 32772606,
-  "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.6/ViralStockPoster-Setup-V0.4.6.exe"
+  "version": "0.5.0",
+  "minimum_supported_version": "0.5.0",
+  "notes": "新增格式 2 本地图片工作流：上传当天模板、PaddleOCR 文字检测、Mask 调试预览、LaMa 优先去字与 OpenCV 自动降级、无字底图缓存、程序精确排版、单张及批量 PNG 导出。文案格式与图片模板已彻底解耦，支持创建、编辑、复制、重命名和删除用户图片模板。修复自动更新安装助手未启动造成的重复下载循环，安装前确认助手已运行，覆盖当前目录后校验版本并重启同一路径。",
+  "sha256": "70e73915d05f3600f49e78912827c9bb6f142d0ee0052873f6f6c2795e5f94b1",
+  "size": 279727548,
+  "chunks": [
+    "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.5.0/ViralStockPoster-Setup-V0.5.0.exe.part01",
+    "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.5.0/ViralStockPoster-Setup-V0.5.0.exe.part02",
+    "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.5.0/ViralStockPoster-Setup-V0.5.0.exe.part03",
+    "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.5.0/ViralStockPoster-Setup-V0.5.0.exe.part04",
+    "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.5.0/ViralStockPoster-Setup-V0.5.0.exe.part05",
+    "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.5.0/ViralStockPoster-Setup-V0.5.0.exe.part06"
+  ]
 }
