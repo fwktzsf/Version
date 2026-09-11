@@ -1,7 +1,7 @@
 {
-  "version": "0.4.2",
-  "notes": "高清参考图修复：直接使用用户上传的 1.png 至 8.png 原始 PNG；移除旧低清 JPG/WebP；预览只缩小不放大；继续支持后台自动下载、校验、静默升级和自动重启。",
-  "sha256": "47e2f21372ee5431d2f4fc8c1dc1e15ffba8bc86d1e8b1d6301db3973d503b55",
-  "size": 31021719,
-  "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.2/ViralStockPoster-Setup-V0.4.2.exe"
+  "version": "0.4.3",
+  "notes": "修复自动更新后仍启动旧版本：更新器现在强制覆盖当前正在运行的软件目录，安装完成后重新启动同一个程序路径；构建流程额外校验安装后的 EXE 版本号。",
+  "sha256": "d812a9c1be8628975cf54093466884bc32d5aa2cfa4a477bc33f18a96ee06931",
+  "size": 31025377,
+  "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.3/ViralStockPoster-Setup-V0.4.3.exe"
 }
