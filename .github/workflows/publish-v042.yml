@@ -1,0 +1,57 @@
+name: Publish V0.4.2 update package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v042.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      ARTIFACT_URL: 'https://sdmntprwestus.oaiusercontent.com/files/00000000-c478-8230-9316-5d4147446943/raw?se=2026-09-11T08%3A53%3A58Z&sp=r&sv=2026-02-06&sr=b&scid=37f96c52-2082-5a7f-bb57-49c899d64d52&skoid=4b04981f-b1dc-41e0-a770-8ce0d5c8f411&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-11T06%3A17%3A28Z&ske=2026-09-12T06%3A17%3A28Z&sks=b&skv=2026-02-06&sig=MDc0Ako3Rn8Q1WchMH3pk16QyiPngHvesl517pw%2BCus%3D'
+      VERSION: '0.4.2'
+      SETUP_NAME: 'ViralStockPoster-Setup-V0.4.2.exe'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download V0.4.2 installer artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 "$ARTIFACT_URL" -o artifact.zip
+          unzip -q artifact.zip -d artifact
+          find artifact -maxdepth 3 -type f -print
+          test -f "artifact/$SETUP_NAME"
+
+      - name: Commit public update feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "releases/v$VERSION"
+          cp "artifact/$SETUP_NAME" "releases/v$VERSION/$SETUP_NAME"
+          SHA256=$(sha256sum "releases/v$VERSION/$SETUP_NAME" | awk '{print $1}')
+          SIZE=$(stat -c%s "releases/v$VERSION/$SETUP_NAME")
+          python - "$SHA256" "$SIZE" <<'PY'
+          import json, sys
+          sha256, size = sys.argv[1], int(sys.argv[2])
+          payload = {
+              "version": "0.4.2",
+              "notes": "高清参考图修复：直接使用用户上传的 1.png 至 8.png 原始 PNG；移除旧低清 JPG/WebP；预览只缩小不放大；继续支持后台自动下载、校验、静默升级和自动重启。",
+              "sha256": sha256,
+              "size": size,
+              "url": "https://raw.githubusercontent.com/fwktzsf/Version/main/releases/v0.4.2/ViralStockPoster-Setup-V0.4.2.exe"
+          }
+          with open("latest.json", "w", encoding="utf-8") as f:
+              json.dump(payload, f, ensure_ascii=False, indent=2)
+              f.write("\n")
+          PY
+          git config user.name "ViralStockPoster Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add latest.json "releases/v$VERSION/$SETUP_NAME"
+          git commit -m "Publish V0.4.2"
+          git push
